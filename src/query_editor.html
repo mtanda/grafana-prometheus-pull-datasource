@@ -1,0 +1,23 @@
+<query-editor-row ctrl="ctrl">
+
+	<li class="tight-form-item query-keyword">
+		Interval
+	</li>
+
+	<li>
+		<input type="text" class="tight-form-input" style="width: 100px;" ng-model="ctrl.target.interval" spellcheck='false' placeholder="1" ng-blur="ctrl.intervalChanged()">
+	</li>
+
+</query-editor-row>
+
+<div class="tight-form" ng-repeat="segment in ctrl.metricSegments">
+	<ul class="tight-form-list">
+		<li class="tight-form-item query-keyword tight-form-align" style="width: 79px;">
+			Metric
+		</li>
+		<li>
+			<metric-segment segment="segment" get-options="ctrl.getMetricSegments(segment, $index)" on-change="ctrl.metricSegmentChanged(segment, $index)"></metric-segment>
+		</li>
+	</ul>
+	<div class="clearfix"></div>
+</div>
