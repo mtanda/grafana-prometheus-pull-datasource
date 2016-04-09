@@ -47,18 +47,18 @@ class PrometheusPullQueryCtrl extends QueryCtrl {
       }
     }
 
-    if (this.metricSegments.length > 0) {
-      this.panelCtrl.dataStream.start();
-    } else {
-      this.panelCtrl.dataStream.stop();
-    }
-
     this.target.metrics = this.metricSegments.reduce((memo, item) => {
       if (!item.fake) {
         memo.push({name: item.value});
       }
       return memo;
     }, []);
+
+    if (this.target.metrics.length > 0) {
+      this.panelCtrl.dataStream.start();
+    } else {
+      this.panelCtrl.dataStream.stop();
+    }
   }
 }
 
