@@ -71,7 +71,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
                   var result = res.data.split(/\n/).filter(function (l) {
                     return l.indexOf('#') !== 0;
                   }).map(function (l) {
-                    return l.split(' ');
+                    return l.split(/[{ ]/);
                   }).filter(function (m) {
                     return targetMetrics.includes(m[0]);
                   });

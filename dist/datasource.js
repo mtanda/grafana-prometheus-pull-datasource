@@ -85,7 +85,7 @@ System.register(['moment', './stream_handler'], function (_export, _context) {
               _this.metricsCache = res.data.split(/\n/).filter(function (l) {
                 return l.indexOf('#') !== 0;
               }).map(function (l) {
-                var metric = l.split(' ')[0];
+                var metric = l.split(/[{ ]/)[0];
                 return { text: metric, value: metric };
               });
 
