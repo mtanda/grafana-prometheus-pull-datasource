@@ -36,7 +36,7 @@ export class StreamHandler {
           var result = res.data.split(/\n/).filter(l => {
             return l.indexOf('#') !== 0;
           }).map(l => {
-            return l.split(' ');
+            return l.split(/[{ ]/);
           }).filter(m => {
             return targetMetrics.includes(m[0]);
           });

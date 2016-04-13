@@ -45,7 +45,7 @@ export class PrometheusPullDatasource {
       this.metricsCache = res.data.split(/\n/).filter(l => {
         return l.indexOf('#') !== 0;
       }).map(l => {
-        var metric = l.split(' ')[0];
+        var metric = l.split(/[{ ]/)[0];
         return { text: metric, value: metric };
       });
 
