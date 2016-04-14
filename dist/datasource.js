@@ -1,7 +1,7 @@
 'use strict';
 
-System.register(['moment', './stream_handler'], function (_export, _context) {
-  var moment, StreamHandler, _createClass, PrometheusPullDatasource;
+System.register(['lodash', './stream_handler'], function (_export, _context) {
+  var _, StreamHandler, _createClass, PrometheusPullDatasource;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -10,8 +10,8 @@ System.register(['moment', './stream_handler'], function (_export, _context) {
   }
 
   return {
-    setters: [function (_moment) {
-      moment = _moment.default;
+    setters: [function (_lodash) {
+      _ = _lodash.default;
     }, function (_stream_handler) {
       StreamHandler = _stream_handler.StreamHandler;
     }],
@@ -82,12 +82,14 @@ System.register(['moment', './stream_handler'], function (_export, _context) {
                 return [];
               }
 
-              _this.metricsCache = res.data.split(/\n/).filter(function (l) {
+              _this.metricsCache = _.chain(res.data.split(/\n/)).filter(function (l) {
                 return l.indexOf('#') !== 0;
               }).map(function (l) {
                 var metric = l.split(/[{ ]/)[0];
                 return { text: metric, value: metric };
-              });
+              }).uniq(function (m) {
+                return m.value;
+              }).value();
 
               return _this.metricsCache;
             });

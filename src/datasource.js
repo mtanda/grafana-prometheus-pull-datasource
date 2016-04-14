@@ -1,4 +1,4 @@
-import moment from 'moment';
+import _ from 'lodash';
 import {StreamHandler} from './stream_handler';
 
 export class PrometheusPullDatasource {
@@ -42,12 +42,17 @@ export class PrometheusPullDatasource {
         return [];
       }
 
-      this.metricsCache = res.data.split(/\n/).filter(l => {
+      this.metricsCache = _.chain(res.data.split(/\n/))
+      .filter(l => {
         return l.indexOf('#') !== 0;
-      }).map(l => {
+      })
+      .map(l => {
         var metric = l.split(/[{ ]/)[0];
         return { text: metric, value: metric };
-      });
+      })
+      .uniq(m => {
+        return m.value;
+      }).value();
 
       return this.metricsCache;
     });
