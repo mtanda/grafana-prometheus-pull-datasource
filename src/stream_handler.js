@@ -9,12 +9,14 @@ export class StreamHandler {
     this.options = options;
     this.ds = datasource;
     this.subject = new Subject();
+    this.pause = false;
   }
 
   start() {
     if (this.source) {
       return;
     }
+    this.pause = false;
 
     var target = this.options.targets[0];
 
@@ -29,7 +31,7 @@ export class StreamHandler {
     this.source = Observable.interval(interval)
     .flatMap(function () {
       var promise = new Promise(resolve => {
-        if (target.metrics.length === 0) {
+        if (target.metrics.length === 0 || self.pause) {
           return resolve([]);
         }
 
@@ -80,6 +82,7 @@ export class StreamHandler {
     console.log('Forcing event stream stop');
     if (this.source) {
       // TODO
+      this.pause = true;
     }
     this.source = null;
   }

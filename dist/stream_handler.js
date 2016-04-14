@@ -43,6 +43,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
           this.options = options;
           this.ds = datasource;
           this.subject = new Subject();
+          this.pause = false;
         }
 
         _createClass(StreamHandler, [{
@@ -51,6 +52,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             if (this.source) {
               return;
             }
+            this.pause = false;
 
             var target = this.options.targets[0];
 
@@ -64,6 +66,10 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             var self = this;
             this.source = Observable.interval(interval).flatMap(function () {
               var promise = new Promise(function (resolve) {
+                if (target.metrics.length === 0 || self.pause) {
+                  return resolve([]);
+                }
+
                 self.ds.request({ method: 'get', url: '/metrics' }).then(function (res) {
                   var targetMetrics = target.metrics.map(function (m) {
                     return m.name;
@@ -110,6 +116,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             console.log('Forcing event stream stop');
             if (this.source) {
               // TODO
+              this.pause = true;
             }
             this.source = null;
           }
