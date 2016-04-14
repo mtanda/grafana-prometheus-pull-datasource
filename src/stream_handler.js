@@ -13,10 +13,11 @@ export class StreamHandler {
   }
 
   start() {
+    this.pause = false;
+
     if (this.source) {
       return;
     }
-    this.pause = false;
 
     var target = this.options.targets[0];
 

@@ -49,10 +49,11 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
         _createClass(StreamHandler, [{
           key: 'start',
           value: function start() {
+            this.pause = false;
+
             if (this.source) {
               return;
             }
-            this.pause = false;
 
             var target = this.options.targets[0];
 
