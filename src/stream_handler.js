@@ -29,6 +29,10 @@ export class StreamHandler {
     this.source = Observable.interval(interval)
     .flatMap(function () {
       var promise = new Promise(resolve => {
+        if (target.metrics.length === 0) {
+          return resolve([]);
+        }
+
         self.ds.request({ method: 'get', url: '/metrics' }).then(res => {
           var targetMetrics = target.metrics.map(m => {
             return m.name;
