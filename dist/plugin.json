@@ -1,12 +1,12 @@
 {
   "type": "datasource",
   "name": "Prometheus Pull",
-  "id": "prometheus-pull",
+  "id": "grafana-prometheus-pull-datasource",
 
   "staticRoot": ".",
 
   "partials": {
-    "config": "public/app/plugins/datasource/prometheus-pull/partials/config.html"
+    "config": "public/app/plugins/datasource/grafana-prometheus-pull-datasource/partials/config.html"
   },
 
   "metrics": true,
@@ -17,8 +17,8 @@
                   "name": "Mitsuhiro Tanda"
           },
           "links": [
-                  {"name": "GitHub", "url": "https://github.com/mtanda/prometheus-pull-datasource"},
-                  {"name": "MIT License", "url": "https://github.com/mtanda/prometheus-pull-datasource/blob/master/LICENSE"}
+                  {"name": "GitHub", "url": "https://github.com/mtanda/grafana-prometheus-pull-datasource"},
+                  {"name": "MIT License", "url": "https://github.com/mtanda/grafana-prometheus-pull-datasource/blob/master/LICENSE"}
           ],
           "version": "1.0.0",
           "updated": "2016-04-07"
