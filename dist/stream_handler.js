@@ -115,7 +115,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
           value: function stop() {
             console.log('Forcing event stream stop');
             if (this.source) {
-              // TODO
+              // TODO: stop timer
               this.pause = true;
             }
             this.source = null;

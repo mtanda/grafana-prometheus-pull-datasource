@@ -81,7 +81,7 @@ export class StreamHandler {
   stop() {
     console.log('Forcing event stream stop');
     if (this.source) {
-      // TODO
+      // TODO: stop timer
       this.pause = true;
     }
     this.source = null;
