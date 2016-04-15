@@ -43,14 +43,11 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
           this.options = options;
           this.ds = datasource;
           this.subject = new Subject();
-          this.pause = false;
         }
 
         _createClass(StreamHandler, [{
           key: 'start',
           value: function start() {
-            this.pause = false;
-
             if (this.source) {
               return;
             }
@@ -67,7 +64,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             var self = this;
             this.source = Observable.interval(interval).flatMap(function () {
               var promise = new Promise(function (resolve) {
-                if (target.metrics.length === 0 || self.pause) {
+                if (target.metrics.length === 0) {
                   return resolve([]);
                 }
 
@@ -116,8 +113,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
           value: function stop() {
             console.log('Forcing event stream stop');
             if (this.source) {
-              // TODO: stop timer
-              this.pause = true;
+              this.source.unsubscribe();
             }
             this.source = null;
           }
