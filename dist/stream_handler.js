@@ -43,6 +43,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
           this.options = options;
           this.ds = datasource;
           this.subject = new Subject();
+          this.delta = false;
         }
 
         _createClass(StreamHandler, [{
@@ -53,6 +54,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             }
 
             var target = this.options.targets[0];
+            this.delta = target.delta;
 
             console.log('StreamHandler: start()');
 
@@ -128,6 +130,10 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             var endTime = new Date().getTime();
             var startTime = endTime - 60 * 1 * 1000;
             var seriesList = [];
+
+            if (this.delta) {
+              this.metrics = {};
+            }
 
             for (var i = 0; i < data.length; i++) {
               var point = data[i];
