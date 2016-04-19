@@ -132,6 +132,9 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             var seriesList = [];
 
             if (this.delta) {
+              if (data.length === 0) {
+                return;
+              }
               this.metrics = {};
             }
 

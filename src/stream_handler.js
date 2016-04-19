@@ -96,6 +96,9 @@ export class StreamHandler {
     var seriesList = [];
 
     if (this.delta) {
+      if (data.length === 0) {
+        return;
+      }
       this.metrics = {};
     }
 
