@@ -11,7 +11,7 @@ class PrometheusPullQueryCtrl extends QueryCtrl {
     this.removeMetricOption = this.uiSegmentSrv.newSegment({fake: true, value: '-- remove metric --'});
 
     this.target.metrics = this.target.metrics || [];
-    this.target.interval = this.target.interval || '1s';
+    this.target.interval = this.target.interval || '10s';
 
     this.metricSegments = this.target.metrics.map(item => {
       return this.uiSegmentSrv.newSegment({value: item.name, cssClass: 'last'});
