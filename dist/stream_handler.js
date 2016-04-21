@@ -54,6 +54,9 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
             }
 
             var target = this.options.targets[0];
+            if (!target.interval) {
+              return;
+            }
             this.delta = target.delta || false;
 
             console.log('StreamHandler: start()');

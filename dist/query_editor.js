@@ -70,7 +70,7 @@ System.register(['app/plugins/sdk', 'lodash'], function (_export, _context) {
           _this.removeMetricOption = _this.uiSegmentSrv.newSegment({ fake: true, value: '-- remove metric --' });
 
           _this.target.metrics = _this.target.metrics || [];
-          _this.target.interval = _this.target.interval || '1s';
+          _this.target.interval = _this.target.interval || '10s';
 
           _this.metricSegments = _this.target.metrics.map(function (item) {
             return _this.uiSegmentSrv.newSegment({ value: item.name, cssClass: 'last' });
@@ -96,6 +96,12 @@ System.register(['app/plugins/sdk', 'lodash'], function (_export, _context) {
 
               return elements;
             });
+          }
+        }, {
+          key: 'intervalChanged',
+          value: function intervalChanged() {
+            this.panelCtrl.dataStream.stop();
+            this.panelCtrl.dataStream.start();
           }
         }, {
           key: 'metricSegmentChanged',

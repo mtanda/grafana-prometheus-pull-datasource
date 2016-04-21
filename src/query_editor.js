@@ -34,6 +34,11 @@ class PrometheusPullQueryCtrl extends QueryCtrl {
     });
   }
 
+  intervalChanged() {
+    this.panelCtrl.dataStream.stop();
+    this.panelCtrl.dataStream.start();
+  }
+
   metricSegmentChanged(segment, index) {
     if (segment.value === this.removeMetricOption.value) {
       this.metricSegments.splice(index, 1);

@@ -18,6 +18,9 @@ export class StreamHandler {
     }
 
     var target = this.options.targets[0];
+    if (!target.interval) {
+      return;
+    }
     this.delta = target.delta || false;
 
     console.log('StreamHandler: start()');
