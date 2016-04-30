@@ -145,7 +145,7 @@ System.register(['moment', 'vendor/npm/rxjs/Rx', 'vendor/npm/rxjs/add/observable
               var point = data[i];
               var series = this.metrics[point[0]];
               if (!series) {
-                series = { target: point[0], datapoints: [] };
+                series = { target: point[0], datapoints: [], delta: this.delta };
                 this.metrics[point[0]] = series;
               }
 
